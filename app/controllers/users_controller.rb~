@@ -58,7 +58,8 @@ class UsersController < ApplicationController
       reset_session
       redirect_to root_url, notice: 'Your user account was deleted. You aren\'t registered here anymore.'
     else
-      redirect_to root_url, notice: 'You are not allowed to edit other users.'
+      flash.now.alert = 'You are not allowed to delete other users.'
+      render :index
     end
   end
 

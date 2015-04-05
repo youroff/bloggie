@@ -1,0 +1,32 @@
+%h1
+  - if current_user
+    = 'Welcome back, ' + current_user.first_name + '! '
+  - else
+    = 'Welcome to Bloggie!'
+
+%p#notice= notice
+- if current_user
+  You have logged in as
+  %b= current_user.username+'. '
+  We're glad to see that you don't forget Bloggie.
+  %p From here, you can:
+  %p
+    = link_to('Browse the list of users', users_path)
+  %p
+    = (link_to 'Edit your user profile', edit_user_path(current_user.id))
+  %p
+    = (link_to 'Delete your account', current_user, :method => :delete, :data => { :confirm => 'Are you sure?' })
+    if you don't want to stay with us anymore.
+- else
+  %p We strongly encourage you to register here to gain access to the rich feature set of this powerful blogging platform.
+  %p 
+    If you're already registered, please 
+    = link_to('Log in', new_session_path)+'. '
+    To create a new account here, please
+    = link_to('Sign up', new_user_path)+'. '
+  %p 
+    From here, you can:
+  %p
+    = link_to('Browse the list of users', users_path)
+    to see if your friends are already registered here.
+

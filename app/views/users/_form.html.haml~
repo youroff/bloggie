@@ -18,7 +18,7 @@
     = f.label :password
     = f.password_field :password
   .field
-    = f.label :password_confirmation
+    = f.label 'Confirm password'
     = f.password_field :password_confirmation
   .actions
     = f.submit 'Save changes'

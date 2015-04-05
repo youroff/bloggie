@@ -10,7 +10,8 @@
   %b Last name:
   = @user.last_name
 
-= link_to('Edit', edit_user_path(@user))+' |' if (!current_user.nil?) && (current_user.username == @user.username)
+= link_to('Edit', edit_user_path(@user)) if (!current_user.nil?) && (current_user.username == @user.username)
+\|
 = link_to 'Back', users_path
 \|
 = link_to 'Home', welcome_index_path
