@@ -54,7 +54,6 @@ class UsersController < ApplicationController
   def destroy
     if @user.id == current_user.id
       @user.destroy
-      session[:user_id] = nil
       reset_session
       redirect_to root_url, notice: 'Your user account was deleted. You aren\'t registered here anymore.'
     else
