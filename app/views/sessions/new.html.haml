@@ -1,7 +1,7 @@
 %h1 Log In
 -if flash[:alert]
   %p#error_explanation= flash[:alert]
-= form_tag session_index_path do
+= form_tag createsession_path do
   .field
     = label_tag :username
     = text_field_tag :username, params[:username]
