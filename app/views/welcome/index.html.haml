@@ -1,10 +1,11 @@
-%h1
+%h1.page-header
   - if current_user
     = 'Welcome back, ' + current_user.first_name + '! '
   - else
     = 'Welcome to Bloggie!'
 
-%p#notice= notice
+- if notice
+  .alert.alert-success= notice
 - if current_user
   You have logged in as
   %b= current_user.username+'. '

@@ -1,0 +1,24 @@
+%nav.navbar.navbar-default.navbar-static-top
+  .container
+    .navbar-header
+      = link_to('Bloggie', root_url, :class => 'navbar-brand')
+    #navbar
+      %ul.nav.navbar-nav
+        %li
+          %a{:href => "#", :title => "To be implemented"} Post
+        %li
+          %a{:href => "#", :title => "To be implemented"} Friends
+        %li
+          %a{:href => "#", :title => "To be implemented"} Profile
+
+    .nav.navbar-text.navbar-right
+      - if current_user
+        Logged in as
+        %strong= current_user.username+'. '
+        = link_to('Log out', logout_path)
+      - else
+        = link_to('Log in', login_path)
+        or
+        = link_to('Sign up', signup_path)
+
+

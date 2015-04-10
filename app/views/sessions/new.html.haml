@@ -1,6 +1,6 @@
 %h1 Log In
 -if flash[:alert]
-  %p#error_explanation= flash[:alert]
+  .alert.alert-danger= flash[:alert]
 = form_tag createsession_path do
   .field
     = label_tag :username
