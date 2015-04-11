@@ -20,6 +20,10 @@ body {
   font-size: 10px;
 }
 
+.field {
+  @extend .form-group;
+}
+
 .field_with_errors {
   background-color: #f2dede;
   border-color: #ebccd1;

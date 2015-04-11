@@ -1,24 +1,18 @@
-= form_for @user do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
-  .field
-    = f.label :username
-    = f.text_field :username
-  .field
-    = f.label :first_name
-    = f.text_field :first_name
-  .field
-    = f.label :last_name
-    = f.text_field :last_name
-  .field
-    = f.label :password
-    = f.password_field :password
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  .actions
-    = f.submit 'Save changes'
+= simple_form_for @user, html: { class: 'form-horizontal' }, |
+  wrapper: :horizontal_form,                                 |
+  wrapper_mappings: {                                        |
+    check_boxes: :horizontal_radio_and_checkboxes,           |
+    radio_buttons: :horizontal_radio_and_checkboxes,         |
+    file: :horizontal_file_input,                            |
+    boolean: :horizontal_boolean                             |
+  } do |f|     |                                                                                                                     
+  = f.error_notification
+  = f.input :username
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :password, required: true
+  = f.input :password_confirmation, required: true
+  = f.button :submit, 'Save changes'
+  
+  
+
