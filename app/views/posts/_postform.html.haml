@@ -1,0 +1,7 @@
+
+= simple_form_for @post do |f|
+  = f.input :title
+  // = f.bootsy_area :body, editor_options: { link: false, color: false }
+  = f.input :body, as: :bootsy, editor_options: { lists: false, color: false, font_styles: false }
+  // = f.input :body, as: :text
+  = f.button :submit, 'Save post'

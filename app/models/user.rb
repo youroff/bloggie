@@ -10,4 +10,5 @@ class User < ActiveRecord::Base
   has_many :followings, class_name: Friendship, foreign_key: :friend_id
   has_many :followers, through: :followings, source: :user
 
+  has_many :posts
 end

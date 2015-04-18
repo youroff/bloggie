@@ -3,13 +3,16 @@
     .navbar-header
       = link_to('Bloggie', root_url, :class => 'navbar-brand')
     #navbar
-      %ul.nav.navbar-nav
-        %li
-          %a{:href => "#", :title => "To be implemented"} Post
-        %li
-          %a{:href => "#", :title => "To be implemented"} Friends
-        %li
-          %a{:href => "#", :title => "To be implemented"} Profile
+      - if current_user
+        %ul.nav.navbar-nav
+          %li
+            = link_to('New post', new_post_path)
+          %li
+            = link_to('My blog', blog_path(current_user))
+          %li
+            = link_to('My friends', feed_path(current_user))
+          %li
+            %a{:href => "#", :title => "To be implemented"} Profile
 
     .nav.navbar-text.navbar-right
       - if current_user

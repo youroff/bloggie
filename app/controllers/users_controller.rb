@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :blog, :feed]
 
   # GET /users
   def index
@@ -59,6 +59,19 @@ class UsersController < ApplicationController
     else
       redirect_to root_url, notice: 'You are not allowed to edit other users.'
     end
+  end
+
+  # GET /users/1/blog
+  # displays all posts by the specified user
+  def blog
+    @posts = Post.where(user_id: params[:id]).order(created_at: :desc)
+  end
+
+  # GET /users/1/feed
+  # displays all posts by the friends of the specified user
+  def feed
+    friend_ids = Friendship.where(user_id: params[:id]).pluck(:friend_id)
+    @posts = Post.where(user_id: friend_ids).order(created_at: :desc)
   end
 
   private

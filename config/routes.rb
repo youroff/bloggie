@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  mount Bootsy::Engine => '/bootsy', as: 'bootsy'
+  get 'posts/new', as: 'new_post'
+
+  post 'posts/create', as: 'posts'
+
+  get 'posts/:id/edit', to: 'posts#edit', as: 'edit_post'
+  patch 'posts/:id/update', to: 'posts#update', as: 'post'
+  get 'posts/:id/show', to: 'posts#show'
+  delete 'posts/:id/destroy', to: 'posts#destroy', as: 'delete_post'
+
+  get 'users/:id/blog', to: 'users#blog', as: 'blog'
+  get 'users/:id/feed', to: 'users#feed', as: 'feed'
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'

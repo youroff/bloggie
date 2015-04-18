@@ -13,4 +13,10 @@ private
   def authorize
     redirect_to login_url, notice: "Not authorized" if current_user.nil?
   end
+
+  def username_from_id (user_id)
+    User.where(id: user_id).pluck(:username).first
+  end
+  helper_method :username_from_id
+
 end

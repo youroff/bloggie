@@ -1,0 +1,26 @@
+%a{ :name => "post"+post.id.to_s }
+.panel.panel-default
+	.panel-heading
+		%b
+			= username_from_id(post.user_id)
+		- if post.updated_at < Time.now
+			wrote 
+			= time_ago_in_words(post.created_at)
+			ago:
+		- else
+			is planning to write:
+	.panel-body
+		- if (!post.title.empty?)
+			%h4
+				= strip_tags(post.title)
+		= sanitize(post.body)
+	.panel-footer
+		- if (!current_user.nil?) and (post.user_id == current_user.id)
+			= link_to('(Edit)', edit_post_path(id: post.id))
+			= link_to('(Delete)', delete_post_path(id: post.id), :method => :delete, :data => { :confirm => 'Are you sure?' })
+			\|
+		- else
+			%a{:href => "#", :title => "To be implemented"} (Like)
+		%a{:href => "#", :title => "To be implemented"} (Comment)
+		%a{:href => "#", :title => "To be implemented"} (Blackjack)
+		%a{:href => "#", :title => "To be implemented"} (Hookers)
