@@ -1,0 +1,7 @@
+- if !current_user.nil? && current_user.id != user.id
+	- if is_my_friend(user)
+		%a{ role: "button", class: "btn btn-default", href: unfollow_url(user.id) }
+			Unfollow
+	- else
+		%a{ role: "button", class: "btn btn-default", href: follow_url(user.id) }
+			Follow

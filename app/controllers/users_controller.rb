@@ -65,6 +65,34 @@ class UsersController < ApplicationController
     @posts = Post.includes(:user).where(user_id: friend_ids).order(created_at: :desc)
   end
 
+  # GET /users/1/follow
+  # adds the specified user to the list of friends of the current user
+  def follow
+    if (!current_user.friends.exists?(params[:id]))
+      fs = Friendship.new(user_id: current_user.id, friend_id: params[:id])
+      if fs.save
+        redirect_to user_url(params[:id]), notice: "Now you can read this user's posts in your friends feed."
+      else
+        flash.alert = "Something went wrong. You cannot follow this user."
+        redirect_to user_url(params[:id])
+      end
+    end
+  end
+
+  # GET /users/1/unfollow
+  # adds the specified user to the list of friends of the current user
+  def unfollow
+    fs = Friendship.where(user_id: current_user, friend_id: params[:id]).first
+    if fs
+      fs.destroy
+      redirect_to user_url(params[:id]), notice: "This user was removed from your list of friends."
+    else
+      flash.alert = "Something went wrong. You weren't following that user."
+      redirect_to users_url
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

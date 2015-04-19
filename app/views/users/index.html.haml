@@ -1,4 +1,4 @@
-%h1 Listing users
+%h1 List of users
 -if flash[:alert]
   %p#error_explanation= flash[:alert]
 
@@ -12,19 +12,21 @@
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.username
+        %td
+          %b= render_username user
         %td= user.first_name+' '+user.last_name
         %td
-          = link_to 'Show', user
+          = link_to 'Profile', user
           - if (!current_user.nil?) 
             - if (current_user.username == user.username)
               = (link_to 'Modify', edit_user_path(user)) 
               = (link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' })
             - else
               - if @friend_ids.include?(user.id)
-                Unfollow
+                = (link_to 'Unfollow', unfollow_path(user)) 
               - else
-                Follow
+                = (link_to 'Follow', follow_path(user)) 
+
 
 %br
 

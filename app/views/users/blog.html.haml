@@ -1,5 +1,12 @@
-%h1
-	= @user.username+"\'s Blog"
+#blogheader
+	%span.blogtitle
+		= @user.username+"\'s Blog"
+		.blogheaderbutton
+			%a{ role: "button", class: "btn btn-default", href: user_url(@user.id) }
+				Profile
+			= render partial: 'followbutton', locals: { user: @user }
+
+
 - if notice
 	.alert.alert-success= notice
 %p

@@ -10,8 +10,6 @@ Rails.application.routes.draw do
   get 'posts/:id/show', to: 'posts#show'
   delete 'posts/:id/destroy', to: 'posts#destroy', as: 'delete_post'
 
-  get 'users/:id/blog', to: 'users#blog', as: 'blog'
-  get 'users/:id/feed', to: 'users#feed', as: 'feed'
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
@@ -20,6 +18,10 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   resources :users
+  get 'users/:id/blog', to: 'users#blog', as: 'blog'
+  get 'users/:id/feed', to: 'users#feed', as: 'feed'
+  get 'users/:id/follow', to: 'users#follow', as: 'follow'
+  get 'users/:id/unfollow', to: 'users#unfollow', as: 'unfollow'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

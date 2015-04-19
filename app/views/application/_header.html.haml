@@ -1,4 +1,4 @@
-%nav.navbar.navbar-default.navbar-static-top
+%nav.navbar.navbar-default.navbar-fixed-top
   .container
     .navbar-header
       = link_to('Bloggie', root_url, :class => 'navbar-brand')
@@ -8,11 +8,11 @@
           %li
             = link_to('New post', new_post_path)
           %li
-            = link_to('My blog', blog_path(current_user))
+            = link_to('Blog', blog_path(current_user))
           %li
-            = link_to('My friends', feed_path(current_user))
+            = link_to('Friends', feed_path(current_user))
           %li
-            %a{:href => "#", :title => "To be implemented"} Profile
+            = link_to('Profile', user_path(current_user))
 
     .nav.navbar-text.navbar-right
       - if current_user

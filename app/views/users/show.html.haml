@@ -1,19 +1,33 @@
+#blogheader
+	%span.blogtitle
+		= @user.username+"\'s Profile"
+		.blogheaderbutton
+			%a{ role: "button", class: "btn btn-default", href: blog_url(@user.id) }
+				Blog
+			= render partial: 'followbutton', locals: { user: @user }
+
 - if notice
-  .alert.alert-success= notice
+	.alert.alert-success= notice
 - if flash[:alert]
-  .alert.alert-danger= flash[:alert]
+	.alert.alert-danger= flash[:alert]
 
 %p
-  %b Username:
-  = @user.username
+	%b Username:
+	= @user.username
 %p
-  %b First name:
-  = @user.first_name
+	%b Full name:
+	= @user.first_name + ' ' + @user.last_name
 %p
-  %b Last name:
-  = @user.last_name
+	%b Friends:
+%p
+	= render_userlist @user.friends
+%p
+	%b Followers:
+%p
+	= render_userlist @user.followers
 
-= link_to('Edit', edit_user_path(@user))+' |' if (!current_user.nil?) && (current_user.username == @user.username)
-= link_to 'Back', users_path
+
+= link_to('Modify', edit_user_path(@user))+' |' if (!current_user.nil?) && (current_user.username == @user.username)
+= link_to 'List of users', users_path
 \|
 = link_to 'Home', welcome_index_path
