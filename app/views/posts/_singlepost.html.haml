@@ -2,7 +2,7 @@
 .panel.panel-default
 	.panel-heading
 		%b
-			= username_from_id(post.user_id)
+			= render_username(post.user)
 		- if post.updated_at < Time.now
 			wrote 
 			= time_ago_in_words(post.created_at)

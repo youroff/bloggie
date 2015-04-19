@@ -1,9 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :blog, :feed]
+  before_action :check_if_logged_in, only: [:edit, :update, :destroy]
+  before_action :check_if_modifying_yourself, only: [:edit, :update, :destroy]
+
 
   # GET /users
   def index
     @users = User.all
+    @friend_ids = current_user.friends.pluck(:id) if (!current_user.nil?)
   end
 
   # GET /users/1
@@ -17,12 +21,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if (!current_user.nil?) && (current_user.id == @user.id)
-      render :edit
-    else
-      redirect_to root_url, notice: 'You are not allowed to edit other users.'
-    end
-
+    render :edit
   end
 
   # POST /users
@@ -39,39 +38,31 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if (!current_user.nil?) && (current_user.id == @user.id)
-      if @user.update(user_params)
-        redirect_to @user, notice: 'User was successfully updated.'
-      else
-        render :edit
-      end
+    if @user.update(user_params)
+      redirect_to @user, notice: 'User was successfully updated.'
     else
-      redirect_to root_url, notice: 'You are not allowed to edit other users.'
+      render :edit
     end
   end
 
   # DELETE /users/1
   def destroy
-    if @user.id == current_user.id
-      @user.destroy
-      reset_session
-      redirect_to root_url, notice: 'Your user account was deleted. You aren\'t registered here anymore.'
-    else
-      redirect_to root_url, notice: 'You are not allowed to edit other users.'
-    end
+    @user.destroy
+    reset_session
+    redirect_to root_url, notice: 'Your user account was deleted. You aren\'t registered here anymore.'
   end
 
   # GET /users/1/blog
   # displays all posts by the specified user
   def blog
-    @posts = Post.where(user_id: params[:id]).order(created_at: :desc)
+    @posts = Post.includes(:user).where(user_id: params[:id]).order(created_at: :desc)
   end
 
   # GET /users/1/feed
   # displays all posts by the friends of the specified user
   def feed
     friend_ids = Friendship.where(user_id: params[:id]).pluck(:friend_id)
-    @posts = Post.where(user_id: friend_ids).order(created_at: :desc)
+    @posts = Post.includes(:user).where(user_id: friend_ids).order(created_at: :desc)
   end
 
   private
@@ -84,4 +75,19 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:username, :first_name, :last_name, :password, :password_confirmation)
     end
+
+    def check_if_logged_in
+      if (current_user.nil?)
+        flash.alert = "You must be logged in to perform this action."
+        redirect_to login_url
+      end
+    end
+
+    def check_if_modifying_yourself
+      if @user.id != current_user.id
+        flash.alert = "You only can modify your own account."
+        redirect_to user_url(current_user.id)
+      end
+    end
+
 end

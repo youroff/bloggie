@@ -8,4 +8,6 @@ Update history:
 5.04.2015   (Oleg B.) Added basic user authentication.
 10.04.2015  (Oleg B.) Added Bootstrap.
 11.04.2015  (Oleg B.) Added SimpleForm.
+17.04.2015  (Oleg B.) Added basic Post functionality.
+
 

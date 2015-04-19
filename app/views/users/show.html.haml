@@ -1,5 +1,7 @@
 - if notice
   .alert.alert-success= notice
+- if flash[:alert]
+  .alert.alert-danger= flash[:alert]
 
 %p
   %b Username:
