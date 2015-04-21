@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :blog, :feed]
-  before_action :check_if_logged_in, only: [:edit, :update, :destroy]
+  before_action :check_if_logged_in, only: [:edit, :update, :destroy, :follow, :unfollow]
   before_action :check_if_modifying_yourself, only: [:edit, :update, :destroy]
 
 
   # GET /users
   def index
     @users = User.all
-    @friend_ids = current_user.friends.pluck(:id) if (!current_user.nil?)
+#    @friend_ids = current_user.friends.pluck(:id) if (!current_user.nil?)
   end
 
   # GET /users/1
@@ -61,8 +61,7 @@ class UsersController < ApplicationController
   # GET /users/1/feed
   # displays all posts by the friends of the specified user
   def feed
-    friend_ids = Friendship.where(user_id: params[:id]).pluck(:friend_id)
-    @posts = Post.includes(:user).where(user_id: friend_ids).order(created_at: :desc)
+    @posts = Post.feed_of(params[:id])
   end
 
   # GET /users/1/follow

@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
   has_many :followers, through: :followings, source: :user
 
   has_many :posts
+
+  def is_friend_of? user2
+  	user2.friendships.any? { |f| f.friend_id == self.id } 
+  end
 end
