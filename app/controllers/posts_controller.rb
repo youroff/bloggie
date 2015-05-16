@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      redirect_to blog_path, notice: 'The post was created!'
+      redirect_to blog_path(current_user), notice: 'The post was created!'
     else
       render :new
     end

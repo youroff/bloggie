@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 
 gem 'rails', '4.2.1'
+gem 'rails-api'
 gem 'sqlite3'
 
 gem 'sass-rails', '~> 5.0'
@@ -11,6 +12,8 @@ gem "haml-rails", "~> 0.9"
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'simple_form'
 gem 'bootsy'
+
+gem 'active_model_serializers'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

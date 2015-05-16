@@ -23,6 +23,11 @@ Rails.application.routes.draw do
   get 'users/:id/follow', to: 'users#follow', as: 'follow'
   get 'users/:id/unfollow', to: 'users#unfollow', as: 'unfollow'
 
+  namespace :api, defaults: {format: :json} do
+    resources :users
+    resources :posts
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
