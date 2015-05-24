@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users
     resources :posts
+    get 'users/:id/blog', to: 'users#blog', as: 'blog'
+    get 'users/:id/feed', to: 'users#feed', as: 'feed'
+
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
