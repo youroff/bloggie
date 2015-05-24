@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
   def is_friend_of? user2
   	user2.friendships.any? { |f| f.friend_id == self.id } 
   end
+  
+  def self.find_by_credentials username, password
+    find_by(username: username).try(:authenticate, password)
+  end
 end

@@ -1,28 +1,35 @@
 Rails.application.routes.draw do
 
+  root 'welcome#index'
   mount Bootsy::Engine => '/bootsy', as: 'bootsy'
-  get 'posts/new', as: 'new_post'
-
-  post 'posts/create', as: 'posts'
-
-  get 'posts/:id/edit', to: 'posts#edit', as: 'edit_post'
-  patch 'posts/:id/update', to: 'posts#update', as: 'post'
-  get 'posts/:id/show', to: 'posts#show'
-  delete 'posts/:id/destroy', to: 'posts#destroy', as: 'delete_post'
-
-  get 'signup', to: 'users#new', as: 'signup'
-  get 'login', to: 'sessions#new', as: 'login'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
-  post 'createsession', to: 'sessions#create', as: 'createsession'
-   
-  get 'welcome/index'
-
+  
   resources :users
-  get 'users/:id/blog', to: 'users#blog', as: 'blog'
-  get 'users/:id/feed', to: 'users#feed', as: 'feed'
-  get 'users/:id/follow', to: 'users#follow', as: 'follow'
-  get 'users/:id/unfollow', to: 'users#unfollow', as: 'unfollow'
+  resources :posts
+  resource  :session
+  resource  :profile, only: :show
 
+  # get 'users/:id/blog', to: 'users#blog', as: 'blog'
+  # get 'users/:id/feed', to: 'users#feed', as: 'feed'
+  # get 'users/:id/follow', to: 'users#follow', as: 'follow'
+  # get 'users/:id/unfollow', to: 'users#unfollow', as: 'unfollow'
+  #
+  #
+  #
+  #
+  # get 'posts/new', as: 'new_post'
+  #
+  # post 'posts/create', as: 'posts'
+  #
+  # get 'posts/:id/edit', to: 'posts#edit', as: 'edit_post'
+  # patch 'posts/:id/update', to: 'posts#update', as: 'post'
+  # get 'posts/:id/show', to: 'posts#show'
+  # delete 'posts/:id/destroy', to: 'posts#destroy', as: 'delete_post'
+  #
+  # get 'signup', to: 'users#new', as: 'signup'
+  # get 'login', to: 'sessions#new', as: 'login'
+  # get 'logout', to: 'sessions#destroy', as: 'logout'
+  # post 'createsession', to: 'sessions#create', as: 'createsession'
+   
   namespace :api, defaults: {format: :json} do
     resources :users
     resources :posts
@@ -35,7 +42,6 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
   # root 'users#index'
 
   # Example of regular route:

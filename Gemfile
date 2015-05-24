@@ -14,6 +14,7 @@ gem 'simple_form'
 gem 'bootsy'
 
 gem 'active_model_serializers'
+gem 'responders'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

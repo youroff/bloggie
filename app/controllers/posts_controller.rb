@@ -13,6 +13,7 @@ class PostsController < ApplicationController
     else
       render :new
     end
+    # respond_with @post
   end
 
   def edit
