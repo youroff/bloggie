@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  use_doorkeeper do
+    skip_controllers :applications, :authorized_applications
+  end
   root 'welcome#index'
   mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   
