@@ -1,6 +1,6 @@
 module Api
 	class UsersController < BaseController
-	 	before_action :set_user, only: [:show]
+	 	# before_action :set_user, only: [:show]
 
 		def index
 			@users = User.all
@@ -8,7 +8,12 @@ module Api
 		end
 
 		def show
-			render json: @user
+			if params[:id] == "me"
+				who_am_i
+			else
+				@user = User.find(params[:id])
+				render json: @user
+			end
 		end
 
 		def blog
@@ -21,6 +26,19 @@ module Api
 			render json: @posts
 		end
 
+		def who_am_i
+			# if doorkeeper_token.nil? 
+			# 	raise "doorkeeper_token is nil"
+			# end
+			# raise doorkeeper_token.to_yaml
+			if doorkeeper_token
+				# me = { user: { id: 1, username: "Logged in", first_name: "", last_name: "" } }
+				me = User.find(doorkeeper_token.resource_owner_id)
+			else
+				me = { user: { id: 0, username: "not logged in", first_name: "", last_name: "" } }
+			end
+			render json: me
+		end
 
 		private
 			# Use callbacks to share common setup or constraints between actions.
