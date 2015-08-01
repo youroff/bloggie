@@ -8,12 +8,8 @@ module Api
 		end
 
 		def show
-			if params[:id] == "me"
-				who_am_i
-			else
-				@user = User.find(params[:id])
-				render json: @user
-			end
+			@user = User.find(params[:id])
+			render json: @user
 		end
 
 		def blog
@@ -27,12 +23,7 @@ module Api
 		end
 
 		def who_am_i
-			# if doorkeeper_token.nil? 
-			# 	raise "doorkeeper_token is nil"
-			# end
-			# raise doorkeeper_token.to_yaml
 			if doorkeeper_token
-				# me = { user: { id: 1, username: "Logged in", first_name: "", last_name: "" } }
 				me = User.find(doorkeeper_token.resource_owner_id)
 			else
 				me = { user: { id: 0, username: "not logged in", first_name: "", last_name: "" } }
