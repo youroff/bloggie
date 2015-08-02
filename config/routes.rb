@@ -39,6 +39,8 @@ Rails.application.routes.draw do
     get 'users/:id/blog', to: 'users#blog', as: 'blog'
     get 'users/:id/feed', to: 'users#feed', as: 'feed'
     get 'who_am_i', to: 'users#who_am_i', as: 'who_am_i'
+    get 'my_blog', to: 'users#my_blog', as: 'my_blog'
+    get 'my_feed', to: 'users#my_feed', as: 'my_feed'
 
   end
 
