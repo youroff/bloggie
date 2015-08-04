@@ -80,6 +80,7 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
+    has_scope (0.5.1)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -178,6 +179,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   doorkeeper (~> 3.0.0.rc2)
   haml-rails (~> 0.9)
+  has_scope
   jquery-rails
   rack-cors
   rails (= 4.2.1)

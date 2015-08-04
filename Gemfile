@@ -15,6 +15,7 @@ gem 'bootsy'
 
 gem 'active_model_serializers'
 gem 'responders'
+gem 'has_scope'
 
 gem 'doorkeeper', '~> 3.0.0.rc2'
 
